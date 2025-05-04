@@ -1,0 +1,67 @@
+resources:
+- ../../kube-prometheus 
+
+
+      
+patchesStrategicMerge:
+  - |-
+    apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    metadata:
+      name: prometheuses.monitoring.coreos.com
+    $patch: delete
+  - |-
+    apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    metadata:
+      name: prometheusagents.monitoring.coreos.com
+    $patch: delete
+  - |-
+    apiVersion: monitoring.coreos.com/v1
+    kind: Prometheus
+    metadata:
+      name: iventure-kube-prometheus-s-prometheus
+      namespace: monitoring
+    spec:
+      additionalScrapeConfigs:
+        name: additional-scrape-configs
+        key: prometheus-additional.yaml
+
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: iventure-grafana
+      namespace: monitoring
+    spec:
+      template:
+        spec:
+          containers:
+          - name: grafana
+            env:
+            - name: GF_SECURITY_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-admin-credentials
+                  key: admin-user
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-admin-credentials
+                  key: admin-password      
+
+secretGenerator:
+- name: additional-scrape-configs
+  namespace: monitoring
+  files:
+  - prometheus-additional.yaml
+  options:
+    disableNameSuffixHash: true  
+    
+- name: grafana-admin-credentials
+  namespace: monitoring
+  literals:
+    - admin-user=admin
+    - admin-password=iventure@2025
+  options:
+      disableNameSuffixHash: true   

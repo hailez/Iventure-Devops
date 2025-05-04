@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kube-prometheus-stack-kube-scheduler
+    app.kubernetes.io/instance: iventure
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 51.0.2
+    chart: kube-prometheus-stack-51.0.2
+    heritage: Helm
+    jobLabel: kube-scheduler
+    release: iventure
+  name: iventure-kube-prometheus-s-kube-scheduler
+  namespace: monitoring
+spec:
+  clusterIP: None
+  ports:
+  - name: http-metrics
+    port: 10259
+    protocol: TCP
+    targetPort: 10259
+  selector:
+    component: kube-scheduler
+  type: ClusterIP

@@ -1,0 +1,33 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: kube-prometheus-stack-operator
+    app.kubernetes.io/instance: iventure
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 51.0.2
+    chart: kube-prometheus-stack-51.0.2
+    heritage: Helm
+    release: iventure
+  name: iventure-kube-prometheus-s-operator
+  namespace: monitoring
+spec:
+  endpoints:
+  - honorLabels: true
+    port: https
+    scheme: https
+    tlsConfig:
+      ca:
+        secret:
+          key: ca
+          name: iventure-kube-prometheus-s-admission
+          optional: false
+      serverName: iventure-kube-prometheus-s-operator
+  namespaceSelector:
+    matchNames:
+    - monitoring
+  selector:
+    matchLabels:
+      app: kube-prometheus-stack-operator
+      release: iventure

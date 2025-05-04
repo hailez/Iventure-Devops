@@ -1,0 +1,10 @@
+- job_name: 'external-node-exporters'
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+    - targets:
+      - target0.bewerber.iventuregroup.com:9100
+      - target1.bewerber.iventuregroup.com:9100
+      - target2.bewerber.iventuregroup.com:9100
+      labels:
+        group: 'external-nodes'

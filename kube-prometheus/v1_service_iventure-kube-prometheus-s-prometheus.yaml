@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kube-prometheus-stack-prometheus
+    app.kubernetes.io/instance: iventure
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 51.0.2
+    chart: kube-prometheus-stack-51.0.2
+    heritage: Helm
+    release: iventure
+    self-monitor: "true"
+  name: iventure-kube-prometheus-s-prometheus
+  namespace: monitoring
+spec:
+  ports:
+  - name: http-web
+    port: 9090
+    targetPort: 9090
+  - appProtocol: http
+    name: reloader-web
+    port: 8080
+    targetPort: reloader-web
+  publishNotReadyAddresses: false
+  selector:
+    app.kubernetes.io/name: prometheus
+    operator.prometheus.io/name: iventure-kube-prometheus-s-prometheus
+  type: ClusterIP
