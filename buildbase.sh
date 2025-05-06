@@ -1,4 +1,4 @@
-BASE_DIR=../bases
+BASE_DIR=../bases/kube-prom/
 OUTPUT_DIR=$(pwd)/kube-prometheus
 ROOT_DIR=$(pwd)
 
