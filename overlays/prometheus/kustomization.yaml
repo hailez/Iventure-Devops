@@ -48,7 +48,8 @@ patchesStrategicMerge:
               valueFrom:
                 secretKeyRef:
                   name: grafana-admin-credentials
-                  key: admin-password      
+                  key: admin-password
+    - grafana-datasource-patch.yaml                            
 
 secretGenerator:
 - name: additional-scrape-configs
@@ -64,4 +65,4 @@ secretGenerator:
     - admin-user=admin
     - admin-password=iventure@2025
   options:
-      disableNameSuffixHash: true   
+      disableNameSuffixHash: true  
