@@ -24,7 +24,7 @@ spec:
         checksum/config: ca572b68d115a78872d665da7d99ddce1b8072c43629117d8a8622add90550cc
         checksum/dashboards-json-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
         checksum/sc-dashboard-provider-config: baca013f0ae848f37b3d0a45c19c85cd7e2973f211b04e3e97de37376a058b53
-        checksum/secret: 115dd9cd69aee09d224581ee6a237740881cb8391f946de3e36d728db7b6adc9
+        checksum/secret: eba86bf3a735ad3eab314cd296de6f1debcf0223bb02d2fc95a4f2e5e661b781
         kubectl.kubernetes.io/default-container: grafana
       labels:
         app.kubernetes.io/instance: iventure
