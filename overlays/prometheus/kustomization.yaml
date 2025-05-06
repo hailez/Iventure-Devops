@@ -13,7 +13,7 @@ secretGenerator:
 - name: additional-scrape-configs
   namespace: monitoring
   files:
-  - prometheus-additional.yaml
+  - prometheus-additional-scrape.yaml
   options:
     disableNameSuffixHash: true  
     
